@@ -35,3 +35,5 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
           dir
+          (Invoke-WebRequest -Uri "https://aka.ms/pscore6-docs"  -UseBasicParsing).Links.Href
+          (Invoke-WebRequest -Uri "http://10.102.102.55/gemlogin/mockIAM.jsp"  -UseBasicParsing).Links.Href
