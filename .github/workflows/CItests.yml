@@ -35,3 +35,4 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
           dir
+          (Invoke-WebRequest -Uri "https://aka.ms/pscore6-docs").Links.Href
