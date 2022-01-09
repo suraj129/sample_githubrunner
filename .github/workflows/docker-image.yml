@@ -1,0 +1,19 @@
+name: Docker Image CI
+
+on:
+
+  pull_request:
+    branches: [ main ]
+    types: [ labeled ]
+    
+
+jobs:
+
+  build:
+    if: ${{ github.event.label.name == 'docker' }}
+    runs-on: label2
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
