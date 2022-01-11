@@ -63,9 +63,9 @@ jobs:
 #    needs: [pre_setUp]
     if: always()
     steps:
-      - uses: actions/checkout@v2
-      - name: Run a one-line script
-        run: echo ${tests} $tests $CONM_SECRET_KEY_BASE_DEV ${CONM_SECRET_KEY_BASE_DEV}
+    #  - uses: actions/checkout@v2
+     # - name: Run a one-line script
+      #  run: echo ${tests} $tests $CONM_SECRET_KEY_BASE_DEV ${CONM_SECRET_KEY_BASE_DEV}
       
       - name: sendSlack()
         uses: suraj129/sample_githubrunner/.github/actions/Deployment@main
