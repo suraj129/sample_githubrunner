@@ -7,7 +7,7 @@ on:
   # Triggers the workflow on push or pull request events but only for the main branch
   pull_request:
     branches: [ main ]
-#    types: [ labeled ]
+    types: [ labeled ]
 
   # Allows you to run this workflow manually from the Actions tab
 #  workflow_dispatch:
@@ -15,11 +15,10 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  checkout:
-#    if: ${{ github.event.label.name == 'env1' }}
-    # The type of runner that the job will run on
+  presetUp:
     runs-on: self-hosted
-
+    if: |
+       ${{ github.event.label.name == 'env1' }} || ${{ github.event.label.name == 'env2' }} || ${{ github.event.label.name == 'env3' }}
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -27,7 +26,7 @@ jobs:
 
   Rspec:    
     runs-on: self-hosted
-    needs: checkout
+    needs: presetUp
     steps:
       - name: Run a one-line script
         run: export tests=Rspec
@@ -35,16 +34,15 @@ jobs:
 
   FrontEndTests:    
     runs-on: self-hosted
-    needs: checkout
+    needs: presetUp
     steps:
       - name: Run a one-line script
         run: export tests=FrontEndTests
 
 
   trainingtests:
-    if: ${{ github.event.label.name == 'docker' }}
     runs-on: self-hosted
-    needs: checkout
+    needs: presetUp
     steps:
       - name: Run a one-line script
         run: export tests=trainingtests
@@ -52,7 +50,7 @@ jobs:
 
   postSlack:
     runs-on: self-hosted
-    needs: [ trainingtests,FrontEndTests,Rspec ]
+    needs: [ trainingtests,FrontEndTests,Rspec,presetUp ]
     if: always()
     steps:
       - name: Run a one-line script
