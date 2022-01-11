@@ -22,18 +22,17 @@ jobs:
   pre_setUp:
     runs-on: self-hosted
     if: |
-       ${{ github.event.label.name == 'env1' }} || ${{ github.event.label.name == 'env2' }} || ${{ github.event.label.name == 'env3' }}
-      
+       ${{ github.event.label.name == 'env1' }} || ${{ github.event.label.name == 'env2' }} || ${{ github.event.label.name == 'env3' }}      
     # Steps represent a sequence of tasks that will be executed as part of the job
-#   steps:
-#      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-#      - uses: actions/checkout@v2
-#      - name: Run a one-line script
-#       run: |
-#         echo ${tests} 
-#          echo $tests 
- #         echo $secrets.CONM_SECRET_KEY_BASE_DEV
-  #        
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+    #  - name: Run a one-line script
+    #    run: |
+    #      echo ${tests} 
+    #      echo $tests 
+    #      echo $secrets.CONM_SECRET_KEY_BASE_DEV
+        
   rSpecTests:    
     runs-on: self-hosted
     needs: pre_setUp
