@@ -48,7 +48,7 @@ jobs:
         run: export tests=trainingtests
 
 
-  postSlack:
+  postAlways:
     runs-on: self-hosted
     needs: [ trainingTests,frontendTests,rSpecTests,pre_setUp ]
     if: always()
@@ -56,9 +56,3 @@ jobs:
       - name: Run a one-line script
         run: echo ${tests} $tests
 
-  clean:
-    runs-on: self-hosted
-    needs: [ postSlack ]
-    steps:
-      - name: Run a one-line script
-        run: echo ${tests} $tests
