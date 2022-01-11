@@ -52,9 +52,9 @@ jobs:
 
   postSlack:
     runs-on: self-hosted
-    needs: [ trainingtests,FrontEndTests,Rspec ]
     steps:
       - name: Run a one-line script
         run: echo ${tests} $tests
 
 
+#needs: [ trainingtests,FrontEndTests,Rspec ]
