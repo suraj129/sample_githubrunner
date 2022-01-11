@@ -30,9 +30,8 @@ jobs:
         run: |
           echo ${tests} 
           echo $tests 
-          echo $secrets.CONM_SECRET_KEY_BASE_DEV 01
-          echo ${secrets.CONM_SECRET_KEY_BASE_DEV} 02
-
+          echo $secrets.CONM_SECRET_KEY_BASE_DEV
+          
   rSpecTests:    
     runs-on: self-hosted
     needs: pre_setUp
