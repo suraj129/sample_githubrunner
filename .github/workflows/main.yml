@@ -40,3 +40,20 @@ jobs:
       - name: Run a one-line script
         run: ls -l
 
+
+  trainingtests:
+    runs-on: self-hosted
+    needs: checkout
+    steps:
+      - name: Run a one-line script
+        run: ls -l
+
+
+  postSlack:
+    runs-on: self-hosted
+    needs: [ trainingtests,FrontEndTests,Rspec ]
+    steps:
+      - name: Run a one-line script
+        run: ls -l
+
+
