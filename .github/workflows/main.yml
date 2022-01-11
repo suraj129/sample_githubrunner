@@ -68,7 +68,7 @@ jobs:
         run: echo ${tests} $tests $CONM_SECRET_KEY_BASE_DEV ${CONM_SECRET_KEY_BASE_DEV}
       
       - name: sendSlack()
-        uses: ./.github/actions/Deployment
+        uses: suraj129/sample_githubrunner/.github/actions/Deployment@main
         with:
           name: Main
           home: the
