@@ -30,7 +30,7 @@ jobs:
     needs: checkout
     steps:
       - name: Run a one-line script
-        run: ls -l
+        run: export tests=Rspec
 
 
   FrontEndTests:    
@@ -38,15 +38,16 @@ jobs:
     needs: checkout
     steps:
       - name: Run a one-line script
-        run: ls -l
+        run: export tests=FrontEndTests
 
 
   trainingtests:
+    if: ${{ github.event.label.name == 'docker' }}
     runs-on: self-hosted
     needs: checkout
     steps:
       - name: Run a one-line script
-        run: ls -l
+        run: export tests=trainingtests
 
 
   postSlack:
@@ -54,6 +55,6 @@ jobs:
     needs: [ trainingtests,FrontEndTests,Rspec ]
     steps:
       - name: Run a one-line script
-        run: ls -l
+        run: echo ${tests} $tests
 
 
