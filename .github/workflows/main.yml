@@ -21,9 +21,10 @@ jobs:
     runs-on: self-hosted
   #  if: |
    #    ${{ github.event.label.name == 'env1' }} || ${{ github.event.label.name == 'env2' }} || ${{ github.event.label.name == 'env3' }}
-    env: |
-      CONM_SECRET_KEY_BASE_DEV: 001
-      CONM_SECRET_KEY_BASE_TEST: 002
+    env:
+      CONM_SECRET_KEY_BASE_DEV: mon
+      CONM_SECRET_KEY_BASE_TEST: d0d
+      
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
