@@ -1,5 +1,18 @@
 name: Deployment
 on:
+  workflow_call:
+    inputs:
+      name:
+        description: 'satellite_name'
+        required: true
+        default: 'tomcat'
+        type: string
+      home:
+        description: 'location'
+        required: false
+        default: 'The Octoverse'
+        type: string
+  
   workflow_dispatch:
     inputs:
       name:
