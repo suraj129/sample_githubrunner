@@ -31,3 +31,12 @@ jobs:
     steps:
       - name: Run a one-line script
         run: ls -l
+
+
+  FrontEndTests:    
+    runs-on: self-hosted
+    needs: checkout
+    steps:
+      - name: Run a one-line script
+        run: ls -l
+
