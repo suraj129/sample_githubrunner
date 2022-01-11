@@ -61,6 +61,7 @@ jobs:
   postAlways:
     runs-on: self-hosted
 #    needs: [ trainingTests,frontendTests,rSpecTests,pre_setUp ]
+    needs: [pre_setUp]
     if: always()
     steps:
       - uses: actions/checkout@v2
@@ -68,8 +69,10 @@ jobs:
         run: echo ${tests} $tests $CONM_SECRET_KEY_BASE_DEV ${CONM_SECRET_KEY_BASE_DEV}
       
       - name: sendSlack()
-        uses: ./.github/actions/release
+        uses: ./.github/actions/Deployment
         with:
-          Branch: Main
+          name: Main
+          home: the
+          
 
 
