@@ -5,26 +5,25 @@ on:
    branches: [ main ]
   
 jobs:
-  R2:
+  R010:
     name: Upload Release Asset
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        id: checkout_code
         
       - name: Build project # This would actually build your project, using zip for an example artifact
         run: |
           zip Dockerfile.zip *
-          
+      
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ steps.checkout_code.outputs.sha_short }}
-          release_name: Release-${{ steps.checkout_code.outputs.sha_short }}
+          tag_name: ${{ github.sha }}
+          release_name: Release ${{ github.sha }}
           draft: false
           prerelease: false
           
@@ -34,7 +33,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.checkout_code.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
           asset_path: Dockerfile.zip
-          asset_name: Release-${{ steps.checkout_code.outputs.branch }}-${{ steps.checkout_code.outputs.sha_short }}
+          asset_name: Dockerfile.zip
           asset_content_type: application/zip
