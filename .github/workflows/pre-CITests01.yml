@@ -22,7 +22,4 @@ jobs:
       
       - name: Run Only if path contains front
         if: github.event.push.paths.contains == '*front*'
-        run: completd.
-        
-	
-
+        run: echo "done"
