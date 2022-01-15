@@ -5,7 +5,7 @@ name: pre-CITests
 # Controls when the workflow will run
 on:
   push:
-    branches: [ main ]
+    branches: [ ABD ]
     paths:
       - '**'
 
