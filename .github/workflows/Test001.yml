@@ -34,7 +34,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-	  		  	
+      
       - name: Create environment file
         run: |
           echo "" > .env
@@ -49,12 +49,12 @@ jobs:
         if: ${{ github.event.paths == 'frontend/**' }}
         run: |
           echo "Frontend"
-		
+
       - name: Run Compose Build
         if: ${{ github.event.path == 'backend/**' }}
         run: |
           echo "backend"
-	  
+
       - name: Run Rspec Tests	
         if: ${{ github.event.paths == 'backend/**' }}
         run: |
