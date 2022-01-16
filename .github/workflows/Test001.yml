@@ -57,7 +57,7 @@ jobs:
           echo "Frontend"
 
       - name: Run Compose Build
-        if: ${{ github.event.path == 'backend/**' }}
+        if: backend in ${{ github.event.push }}
         run: |
           echo "backend"
 
