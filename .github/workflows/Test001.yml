@@ -34,13 +34,6 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      - uses: dorny/paths-filter@v2
-        id: changes
-        with:
-         filters: |
-           src:
-            - 'frontend/**'
-
       - name: Create environment file
         run: |
           echo "" > .env
@@ -52,7 +45,7 @@ jobs:
           echo "CONM_BUCKET_TEST=${CONM_BUCKET_TEST}" >> .env
 
       - name: Run Frontend Tests
-        if: steps.changes.outputs.src == 'true'
+        if: frontend in ${{ github.event.push }}
         run: |
           echo "Frontend"
 
@@ -62,11 +55,11 @@ jobs:
           echo "backend"
 
       - name: Run Rspec Tests	
-        if: ${{ github.event.paths == 'backend/**' }}
+        if: backend in ${{ github.event.push }}
         run: |
           echo "backend-2"
 
       - name: Run Training Tests	
-        if: ${{ github.event.paths == 'training/**' }}
+        if: training in ${{ github.event.push }}
         run: |
           echo "training"
