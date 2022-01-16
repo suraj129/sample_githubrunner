@@ -44,7 +44,7 @@ jobs:
           echo "TRUSTED_COMPONENT_KEY=${secrets.TRUSTED_COMPONENT_KEY}" >> .env
           echo "CONM_BUCKET_DEV=${secrets.CONM_BUCKET_DEV}" >> .env
           echo "CONM_BUCKET_TEST=${secrets.CONM_BUCKET_TEST}" >> .env
-	  
+
       - name: Run Frontend Tests
         if: ${{ github.event.paths == 'frontend/**' }}
         run: |
@@ -59,7 +59,7 @@ jobs:
         if: ${{ github.event.paths == 'backend/**' }}
         run: |
           echo "backend-2"
-	  
+
       - name: Run Training Tests	
         if: ${{ github.event.paths == 'training/**' }}
         run: |
