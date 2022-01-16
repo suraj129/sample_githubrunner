@@ -38,12 +38,12 @@ jobs:
       - name: Create environment file
         run: |
           echo "" > .env
-          echo "CONM_SECRET_KEY_BASE_DEV=${secrets.CONM_SECRET_KEY_BASE_DEV}" >> .env
-          echo "CONM_SECRET_KEY_BASE_TEST=${secrets.CONM_SECRET_KEY_BASE_TEST}" >> .env
-          echo "TRUSTED_COMPONENT_ID=${secrets.TRUSTED_COMPONENT_ID}" >> .env
-          echo "TRUSTED_COMPONENT_KEY=${secrets.TRUSTED_COMPONENT_KEY}" >> .env
-          echo "CONM_BUCKET_DEV=${secrets.CONM_BUCKET_DEV}" >> .env
-          echo "CONM_BUCKET_TEST=${secrets.CONM_BUCKET_TEST}" >> .env
+          echo "CONM_SECRET_KEY_BASE_DEV=${CONM_SECRET_KEY_BASE_DEV}" >> .env
+          echo "CONM_SECRET_KEY_BASE_TEST=${CONM_SECRET_KEY_BASE_TEST}" >> .env
+          echo "TRUSTED_COMPONENT_ID=${TRUSTED_COMPONENT_ID}" >> .env
+          echo "TRUSTED_COMPONENT_KEY=${TRUSTED_COMPONENT_KEY}" >> .env
+          echo "CONM_BUCKET_DEV=${CONM_BUCKET_DEV}" >> .env
+          echo "CONM_BUCKET_TEST=${CONM_BUCKET_TEST}" >> .env
 
       - name: Run Frontend Tests
         if: ${{ github.event.paths == 'frontend/**' }}
