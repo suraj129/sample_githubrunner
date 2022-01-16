@@ -46,7 +46,9 @@ jobs:
           echo "CONM_BUCKET_TEST=${CONM_BUCKET_TEST}" >> .env
 
       - name: Run Frontend Tests
-        if: ${{ github.event.paths == 'frontend/**' }}
+        if: |
+          paths:
+            - 'frontend/**'
         run: |
           echo "Frontend"
 
