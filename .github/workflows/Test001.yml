@@ -5,10 +5,12 @@ name: CITests
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
-  push:
-    branches: [ main ]#types: [ labeled ]           
-   # paths:
-  #    - 'frontend/**'
+#  push:
+#    branches: [ main ]#types: [ labeled ]  
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'frontend/**'
  #     - 'backend/**'
 #      - 'training/**'
 
