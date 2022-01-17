@@ -86,7 +86,7 @@ jobs:
           echo "${{ github.event.push }}"
           echo "${{ github.event.push.paths }}"
           echo "${{ github.event_path }}"
-          echo "cat ${{ github.event_path }}"
+          cat "${{ github.event_path }}"
 
       - name: Run Training Tests	
         if: ${{ steps.random-color-generator.outputs.SELECTED_COLOR }} == 'green\**'
