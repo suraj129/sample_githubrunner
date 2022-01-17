@@ -56,7 +56,8 @@ jobs:
           do
             echo $file
             if [[ $file = frontend/* ]]; then
-              echo "This modified file is under the 'prisma' folder."
+              echo "This modified file is under the 'frontend' folder."
+              echo "::set-output name=path::frontend"
               echo "::set-output name=run_job::true"
               break
             else
@@ -65,7 +66,7 @@ jobs:
           done < files.txt
 
       - name: Run Frontend Tests
-        if: needs.check_files.outputs.run_job == 'true'
+        if: steps.check_files.path == 'frontend'
         run: |
           echo "Frontend"
 
