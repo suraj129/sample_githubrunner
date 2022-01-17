@@ -44,8 +44,28 @@ jobs:
           echo "CONM_BUCKET_DEV=${CONM_BUCKET_DEV}" >> .env
           echo "CONM_BUCKET_TEST=${CONM_BUCKET_TEST}" >> .env
 
+      - name: check modified files
+        id: check_files
+        run: |
+          echo "=============== list modified files ==============="
+          git diff --name-only HEAD^ HEAD
+
+          echo "========== check paths of modified files =========="
+          git diff --name-only HEAD^ HEAD > files.txt
+          while IFS= read -r file
+          do
+            echo $file
+            if [[ $file = frontend/* ]]; then
+              echo "This modified file is under the 'prisma' folder."
+              echo "::set-output name=run_job::true"
+              break
+            else
+              echo "::set-output name=run_job::false"
+            fi
+          done < files.txt
+
       - name: Run Frontend Tests
-        if: frontend in ${{ github.event.push.paths }}
+        if: needs.check_files.outputs.run_job == 'true'
         run: |
           echo "Frontend"
 
