@@ -71,22 +71,22 @@ jobs:
         run: echo "The selected color is ${{ steps.random-color-generator.outputs.SELECTED_COLOR }}"
 
       - name: Run Frontend Tests
-        if: ${{ steps.random-color-generator.outputs.SELECTED_COLOR }} = 'green'
+        if: green == ${{ steps.random-color-generator.outputs.SELECTED_COLOR }}
         run: |
           echo "${{ steps.check_files.road }}"
 
       - name: Run Compose Build
-        if: ${{ steps.random-color-generator.outputs.SELECTED_COLOR }} = 'red'
+        if: ${{ steps.random-color-generator.outputs.SELECTED_COLOR }} == 'green'
         run: |
           echo "backend"
           echo "${{ steps.check_files.road }}"
 
       - name: Run Rspec Tests	
-        if: ${{ steps.random-color-generator.outputs.SELECTED_COLOR }} = 'blue'
+        if: ${{ steps.random-color-generator.outputs.SELECTED_COLOR == "green" }}
         run: |
           echo "backend-2"
 
       - name: Run Training Tests	
-        if: ${{ steps.random-color-generator.outputs.SELECTED_COLOR }} = 'blue'
+        if: ${{ steps.random-color-generator.outputs.SELECTED_COLOR }} == 'green\**'
         run: |
           echo "training"
