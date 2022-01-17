@@ -71,12 +71,12 @@ jobs:
         run: echo "The selected color is ${{ steps.random-color-generator.outputs.SELECTED_COLOR }}"
 
       - name: Run Frontend Tests
-        if: green == ${{ steps.random-color-generator.outputs.SELECTED_COLOR }}
+        if: "contains(github.event.head_commit.message, 'FRONT')"
         run: |
           echo "${{ steps.check_files.road }}"
 
       - name: Run Compose Build
-        if: ${{ steps.random-color-generator.outputs.SELECTED_COLOR }} == 'green'
+        if: "contains(github.event.head_commit.message, 'BQACK')"
         run: |
           echo "backend"
           echo "${{ steps.check_files.road }}"
