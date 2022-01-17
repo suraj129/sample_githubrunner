@@ -83,7 +83,7 @@ jobs:
 
       - name: Run Rspec Tests
         run: |
-          echo "${{ github.event }}"
+          echo "tojson.${{ github.event }}"
 
       - name: Run Training Tests	
         if: ${{ steps.random-color-generator.outputs.SELECTED_COLOR }} == 'green\**'
