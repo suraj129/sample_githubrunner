@@ -66,22 +66,22 @@ jobs:
           done < files.txt
 
       - name: Run Frontend Tests
-        if: git diff --name-only HEAD^ HEAD == 'frontend/**'
+        if: $file = frontend/*
         run: |
           echo "${{ steps.check_files.road }}"
 
       - name: Run Compose Build
-        if: frontend in "git diff --name-only HEAD^ HEAD"
+        if: $file = backend/*
         run: |
           echo "backend"
           echo "${{ steps.check_files.road }}"
 
       - name: Run Rspec Tests	
-        if: frontend in "git diff --name-only HEAD^ HEAD"
+        if: $file = backend/*
         run: |
           echo "backend-2"
 
       - name: Run Training Tests	
-        if: training in ${{ github.event.push }}
+        if: $file = training/*
         run: |
           echo "training"
