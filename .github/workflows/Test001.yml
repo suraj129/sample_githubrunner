@@ -7,10 +7,10 @@ on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
     branches: [ main ]#types: [ labeled ]           
-#    paths:
-#      - 'frontend/**'
-#      - 'backend/**'
-#      - 'training/**'
+    paths:
+      - 'frontend/**'
+      - 'backend/**'
+      - 'training/**'
 
 #Pre-Setup ENVIRONMENT
 env:
@@ -57,7 +57,7 @@ jobs:
             echo $file
             if [[ $file = frontend/* ]]; then
               echo "This modified file is under the 'frontend' folder."
-              echo "::set-output name=path::frontend"
+              echo "::set-output name=road::frontend"
               echo "::set-output name=run_job::true"
               break
             else
@@ -66,9 +66,9 @@ jobs:
           done < files.txt
 
       - name: Run Frontend Tests
-        if: steps.check_files.path == 'frontend'
+        if: ${{ steps.check_files.road == 'frontend' }}
         run: |
-          echo "Frontend"
+          echo "${{ steps.check_files.road }}"
 
       - name: Run Compose Build
         if: backend in ${{ github.event.push }}
