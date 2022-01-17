@@ -64,24 +64,29 @@ jobs:
               echo "::set-output name=run_job::false"
             fi
           done < files.txt
+      - name: Set selected color
+        run: echo '::set-output name=SELECTED_COLOR::green'
+        id: random-color-generator
+      - name: Get color
+        run: echo "The selected color is ${{ steps.random-color-generator.outputs.SELECTED_COLOR }}"
 
       - name: Run Frontend Tests
-        if: $file = frontend/*
+        if: ${{ steps.random-color-generator.outputs.SELECTED_COLOR }} = 'green'
         run: |
           echo "${{ steps.check_files.road }}"
 
       - name: Run Compose Build
-        if: $file = backend/*
+        if: ${{ steps.random-color-generator.outputs.SELECTED_COLOR }} = 'red'
         run: |
           echo "backend"
           echo "${{ steps.check_files.road }}"
 
       - name: Run Rspec Tests	
-        if: $file = backend/*
+        if: ${{ steps.random-color-generator.outputs.SELECTED_COLOR }} = 'blue'
         run: |
           echo "backend-2"
 
       - name: Run Training Tests	
-        if: $file = training/*
+        if: ${{ steps.random-color-generator.outputs.SELECTED_COLOR }} = 'blue'
         run: |
           echo "training"
