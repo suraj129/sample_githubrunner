@@ -81,8 +81,7 @@ jobs:
           echo "backend"
           echo "${{ steps.check_files.road }}"
 
-      - name: Run Rspec Tests	
-        if: ${{ steps.random-color-generator.outputs.SELECTED_COLOR == green }}
+      - name: Run Rspec Tests
         run: |
           echo "backend-2"
 
