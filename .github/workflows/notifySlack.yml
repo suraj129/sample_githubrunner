@@ -1,4 +1,4 @@
-name: Deployment
+name: notifySlack
 
 on:
   workflow_call:
