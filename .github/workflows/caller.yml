@@ -20,5 +20,5 @@ jobs:
     needs: do-it
     uses: suraj129/sample_githubrunner/.github/workflows/called.yml@main
     with:
-      msg: "${{ jobs.do-it.outputs }}"
+      msg: "${{ do-it.outputs }}"
       tag: "Failed"
