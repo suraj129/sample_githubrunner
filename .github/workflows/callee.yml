@@ -30,12 +30,8 @@ jobs:
   callee:
     runs-on: ubuntu-latest
     steps:
-      # Checkout the repository first
-      # Otherwise the workflow won't be able to find the action
-    - uses: actions/checkout@v2
-    - name: Run custom action
-      # Use the location in the repository (without action.yml)
-      uses: ./.github/actions/notifySlack
-      with:
-        channel: test
-        token: ABCD
+      - name: Check out repository
+        uses: actions/checkout@v2
+      - name: Use local my-action
+        uses: ./.github/actions/notifySlack
+
