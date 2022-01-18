@@ -16,4 +16,4 @@ jobs:
         run: echo Hello, world!
 
   called:
-    uses: ./.github/workflows/called.yml@main
+    uses: suraj129/sample_githubrunner/.github/workflows/called.yml@main
