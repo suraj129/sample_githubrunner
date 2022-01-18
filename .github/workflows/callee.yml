@@ -1,0 +1,41 @@
+name: callee
+
+on:
+  workflow_call:
+    inputs:
+      channel:
+        description: 'slack channel name'
+        required: true
+        default: 'test-jenkins'
+        type: string
+      token:
+        description: 'token'
+        required: false
+        default: ''
+        type: string
+
+  workflow_dispatch:
+    inputs:
+      channel:
+        description: 'slack channel name'
+        required: true
+        default: 'test-jenkins'
+        type: string
+      token:
+        description: 'token'
+        required: false
+        default: ''
+        type: string
+jobs:
+  callee:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout the repository first
+      # Otherwise the workflow won't be able to find the action
+    - uses: actions/checkout@v2
+    - name: Run custom action
+      # Use the location in the repository (without action.yml)
+      uses: ./.github/actions/notifySlack
+      with:
+        channel: test
+        token: ABCD
