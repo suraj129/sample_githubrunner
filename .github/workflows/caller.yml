@@ -13,10 +13,9 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Run a one-line script
+        id: tests
         run: echo Hello, world!
-
-  called:
-    uses: suraj129/sample_githubrunner/.github/workflows/called.yml@main
-    with:
-      msg: "${{ job.status }}"
-      tag: "Failed"
+      - uses: suraj129/sample_githubrunner/.github/workflows/called.yml@main
+        with:
+          msg: "${{ steps.tests.outcome }}"
+          tag: "Failed"
