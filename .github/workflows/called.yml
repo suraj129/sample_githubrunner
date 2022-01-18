@@ -1,9 +1,9 @@
-name: Create and Publish Docker Image
+name: called	
 
 on:
   workflow_call:
     inputs:
-      image_name:
+      msg:
         required: false
         type: string
       tag: 
@@ -21,10 +21,10 @@ jobs:
     steps:      
       - uses: actions/checkout@v2
       - name: Print 
-        run: echo "Hello,2"
+        run: echo "${{inputs.msg}}"
 
   do-something-else:
     runs-on: ubuntu-latest
 
     steps:
-    - run: echo "Hello,3"
+    - run: echo "${{inputs.msg}}"
