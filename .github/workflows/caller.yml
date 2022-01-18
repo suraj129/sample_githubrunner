@@ -18,5 +18,5 @@ jobs:
   called:
     uses: suraj129/sample_githubrunner/.github/workflows/called.yml@main
     with:
-      msg: "Passed"
+      msg: "${{ job.status }}"
       tag: "Failed"
