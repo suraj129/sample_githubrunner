@@ -1,0 +1,53 @@
+# This is a basic workflow to showcase the use of Reusable Workflows
+
+name: Workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  checkout:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+  main:
+    needs: [checkout]
+    runs-on: ubuntu-latest
+    steps:
+      - name: develop/main
+        id: main
+        run: echo Hello, world!
+  feature_branch:
+    needs: [main]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Feature Branch
+        id: feature
+        run: echo Hello, world!
+  PR:
+    needs: [feature_branch,main]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Pull Request
+        id: PR
+        run: echo Hello, world!
+  tests:
+    needs: [PR]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run CI tests
+        id: tests
+        run: echo Hello, world!
+  cicomplete:
+    needs: [tests]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Completed CI test
+        id: cicomplete
+        run: echo Hello, world!
+  cleanUp:
+    needs: [cicomplete,main]
+    runs-on: ubuntu-latest
+    steps:
+      - name: cleanUp()  & postSlackMsg()
+        run: echo Hello, world!
