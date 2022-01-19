@@ -6,25 +6,25 @@ on:
   workflow_dispatch:
 
 jobs:
-  checkout:
+  develop:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-  main:
+  master:
     runs-on: ubuntu-latest
     steps:
       - name: develop/main
         id: main
         run: echo Hello, world!
   feature_branch:
-    needs: [main,checkout]
+    needs: [develop,master]
     runs-on: ubuntu-latest
     steps:
       - name: Create Feature Branch
         id: feature
         run: echo Hello, world!
   PR:
-    needs: [feature_branch,main]
+    needs: [feature_branch,cicomplete]
     runs-on: ubuntu-latest
     steps:
       - name: Create Pull Request
