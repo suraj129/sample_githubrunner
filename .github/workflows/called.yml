@@ -4,7 +4,6 @@ on:
   workflow_call:
     inputs:
       title:
-        required: true
         type: string
       request: 
         type: string
@@ -25,4 +24,4 @@ jobs:
 
     steps:
     - run: |
-        echo "${{input.title}}\nRequest:${{input.request}}\nResult:${{input.result}}"
+        echo "${{inputs.title}}\n${{inputs.request}}\n${{inputs.result}}"
