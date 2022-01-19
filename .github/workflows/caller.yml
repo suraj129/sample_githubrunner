@@ -9,7 +9,7 @@ jobs:
   do-it:
     runs-on: ubuntu-latest
     outputs:
-      pass: "${{github.actor}}${{github.event_name}}${{github.head_ref}}${{github.job}}${{github.ref_name}}"
+      pass: "${{github.actor}} ${{github.event_name}} ${{github.head_ref}} ${{github.job}} ${{github.ref_name}} ${{github.run_number}} ${{job.status}}"
 
     steps:
       - uses: actions/checkout@v2
