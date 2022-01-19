@@ -9,7 +9,9 @@ jobs:
   do-it:
     runs-on: ubuntu-latest
     outputs:
-      pass: "${{github.actor}} ${{github.event_name}} ${{github.head_ref}} ${{github.job}} ${{github.ref_name}} ${{github.run_number}} ${{job.status}}"
+      title: " ${{github.event_name}} ${{github.job}}"
+      request: "Author: ${{github.actor}} Branch: ${{github.head_ref}} Target_Branch: ${{github.base_ref}} PR_ID: ${{github.run_number}}"
+      result: "Result ${{job.status}}"
 
     steps:
       - uses: actions/checkout@v2
