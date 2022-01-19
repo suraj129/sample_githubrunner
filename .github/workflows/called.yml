@@ -28,5 +28,5 @@ jobs:
 
     steps:
     - run: |
-        curl -d "text=${{inputs.msg}}" -d "channel=test-jenkins" -H "Authorization: Bearer xoxb-139213247411-2658721193203-L1fi71UkovBFBfcKttc1zyDl" -X POST https://slack.com/api/chat.postMessage
+        echo ${{inputs.msg}}
 
