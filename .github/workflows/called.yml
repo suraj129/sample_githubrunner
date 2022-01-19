@@ -3,16 +3,13 @@ name: called
 on:
   workflow_call:
     inputs:
-      msg:
-        required: false
+      title:
+        required: true
         type: string
-      tag: 
+      request: 
         type: string
-    secrets:
-      registry_username:
-        required: false
-      registry_password:
-        required: false
+      result:
+        type: string
 
 jobs:
   build:
@@ -28,5 +25,4 @@ jobs:
 
     steps:
     - run: |
-        echo ${{inputs.msg}}
-
+        echo "${{input.title}}\nRequest:${{input.request}}\nResult:${{input.result}}"
