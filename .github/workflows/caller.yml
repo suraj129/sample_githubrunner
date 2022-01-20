@@ -18,7 +18,7 @@ jobs:
 
       - name: Run a one-line script
         id: tests
-        run: echo "${{ secrets.SLACK_WEBHOOK}}"
+        run: echo ${{secrets.SLACK_WEBHOOK}}
   called:
     needs: do-it
     uses: suraj129/sample_githubrunner/.github/workflows/called.yml@main
