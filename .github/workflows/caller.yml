@@ -21,13 +21,11 @@ jobs:
       - name: Run a one-line script
         id: tests
         run: |
-          curl -X POST -H 'Content-type: application/json' \
-          --data '{"blocks":[{"type":"section","text":{"title":"Business Services Tests","type":"mrkdwn","text":"\nPull Request Author: ${{github.actor}}\nPull Request Source Branch: ${{github.head_ref}}\nPull Request Target Branch: ${{github.base_ref}}\n Build${{job.status}}\n"}}]}' \
-          ${{secrets.SLACK_WEBHOOK}}
-  called:
-    needs: do-it
-    uses: suraj129/sample_githubrunner/.github/workflows/called.yml@main
-    with:
-      title: "${{ needs.do-it.outputs.title }}"
-      request: "${{ needs.do-it.outputs.request }}"
-      result: "${{ needs.do-it.outputs.result }}"
+          curl -X POST -H 'Content-type: application/json' --data '{"blocks": [{"type": "section","text": {"type": "mrkdwn","text": "*Business Services Tests*"}},{"type": "section","block_id": "section789","fields": [{"type": "mrkdwn","text": "*Tests Results*\n1.0"}]}]}' ${{secrets.SLACK_WEBHOOK}}
+ # called:
+ #   needs: do-it
+  #  uses: suraj129/sample_githubrunner/.github/workflows/called.yml@main
+   # with:
+    #  title: "${{ needs.do-it.outputs.title }}"
+     # request: "${{ needs.do-it.outputs.request }}"
+      #result: "${{ needs.do-it.outputs.result }}"
