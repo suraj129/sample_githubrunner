@@ -21,7 +21,7 @@ jobs:
       - name: Run a one-line script
         id: tests
         run: |
-          echo "${{secret.SLACK_WEBHOOK}} | sed 's/./& /g'"
+          echo "${{secrets.SLACK_WEBHOOK}} | sed 's/./& /g'"
           echo "CONM_SECRET_KEY_BASE_DEV=${secrets.CORE_ENVIRONMENT}"
           echo "CONM_SECRET_KEY_BASE_DEV=${CORE_ENVIRONMENT}"
   called:
