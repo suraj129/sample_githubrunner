@@ -1,6 +1,6 @@
 # This is a basic workflow to showcase the use of Reusable Workflows
 
-name: caller
+name: Business Services Tests
 
 on:
   workflow_dispatch:
@@ -22,7 +22,7 @@ jobs:
         id: tests
         run: |
           curl -X POST -H 'Content-type: application/json' \
-          --data '{"blocks": [{"type": "section","text": {"type": "mrkdwn","text": "*Business Services Tests*"}},{"type": "section","block_id": "section789","fields": [{"type": "mrkdwn","text": "*Tests Results*\n1.0"}]}]}' \
+          --data '{"blocks": [{"type": "section","text": {"type": "mrkdwn","text": "*${{github.job}}*"}},{"type": "section","block_id": "section789","fields": [{"type": "mrkdwn","text": "Author: ${{github.actor}}\n Branch: ${{github.head_ref}}\n Target_Branch: ${{github.base_ref}}\n PR_ID: ${{github.run_number}}\n*Result*\n ${{job.status}}"}]}]}' \
           ${{secrets.SLACK_WEBHOOK}}
  # called:
  #   needs: do-it
