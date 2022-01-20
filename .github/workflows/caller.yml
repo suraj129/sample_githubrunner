@@ -22,7 +22,7 @@ jobs:
         id: tests
         run: |
           curl -X POST -H 'Content-type: application/json' \
-          --data '{"blocks":[{"type":"section","text":{"type":"mrkdwn","text":"Business Services Tests\nPull Request Author:${{github.actor}}\nPull Request Source Branch:${{github.head_ref}}\nPull Request Target Branch:${{github.base_ref}}\nBuild${{job.status}}\n"}}]}' \
+          --data '{"blocks":[{"type":"section","text":{"title":"Business Services Tests","type":"mrkdwn","text":"\nPull Request Author: ${{github.actor}}\nPull Request Source Branch: ${{github.head_ref}}\nPull Request Target Branch: ${{github.base_ref}}\n Build${{job.status}}\n"}}]}' \
           ${{secrets.SLACK_WEBHOOK}}
   called:
     needs: do-it
