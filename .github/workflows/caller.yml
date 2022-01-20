@@ -22,7 +22,7 @@ jobs:
         id: tests
         run: |
           curl -X POST -H 'Content-type: application/json' \
-          --data '{"blocks": [{"type": "section","text": {"type": "mrkdwn","text": "*${{github.job}}*"}},{"type": "section","block_id": "section789","fields": [{"type": "mrkdwn","text": "Author: ${{github.actor}}\n Branch: ${{github.head_ref}}\n Target_Branch: ${{github.base_ref}}\n PR_ID: ${{github.run_number}}\n*Result*\n ${{job.status}}"}]}]}' \
+          --data '{"blocks": [{"type": "section","text": {"type": "mrkdwn","text": "*${{github.event_name}}*"}},{"type": "section","block_id": "section789","fields": [{"type": "mrkdwn","text": "*Author*: ${{github.actor}}\n *PR_Branch*: ${{github.head_ref}}\n *Target_Branch*: ${{github.base_ref}}\n *PR_ID*: ${{github.run_number}}\n*Result*\n ${{job.status}}"}]}]}' \
           ${{secrets.SLACK_WEBHOOK}}
  # called:
  #   needs: do-it
