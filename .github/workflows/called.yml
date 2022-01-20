@@ -18,5 +18,4 @@ jobs:
       - uses: actions/checkout@v2
       - name: Print 
         run: |
-          curl -X POST -H 'Content-type: application/json' --data '{"blocks": [{"type": "section","text": {"type": "mrkdwn","text":"*Business Services Tests*"}},{"type": "section","block_id": "section567","text": {"type": "mrkdwn","text": "Pull Request Author: :star: \nPull Request Source Branch: \nPull Request Target Branch:\n"},},{"type": "section","block_id": "section789","fields": [{"type": "mrkdwn","text": "*Tests Results*\n Passed"}]}]}' \
-          ${{secrets.SLACK_WEBHOOK}}
+          curl -X POST -H 'Content-type: application/json' --data '{"blocks": [{"type": "section","text": {"type": "mrkdwn","text":"*Business Services Tests*"}},{"type": "section","block_id": "section567","text": {"type": "mrkdwn","text": "Pull Request Author: :star: \nPull Request Source Branch: \nPull Request Target Branch:\n"},},{"type": "section","block_id": "section789","fields": [{"type": "mrkdwn","text": "*Tests Results*\n Passed"}]}]}' ${{secrets.SLACK_WEBHOOK}}
