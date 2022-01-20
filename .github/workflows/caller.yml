@@ -9,7 +9,7 @@ jobs:
   do-it:
     runs-on: ubuntu-latest
     env:
-      CORE_ENVIRONMENT: ${secrets.CORE_ENVIRONMENT}
+      CORE_ENVIRONMENT: ${{secrets.CONM_SECRET_KEY_BASE_DEV}}
     outputs:
       title: " ${{github.event_name}} ${{github.job}}"
       request: "Author: ${{github.actor}} Branch: ${{github.head_ref}} Target_Branch: ${{github.base_ref}} PR_ID: ${{github.run_number}}"
@@ -21,7 +21,7 @@ jobs:
       - name: Run a one-line script
         id: tests
         run: |
-          echo "${{secrets.CORE_ENVIRONMENT}}"
+          echo "${{secrets.CONM_SECRET_KEY_BASE_DEV}}"
           echo "${{CORE_ENVIRONMENT}}"
   called:
     needs: do-it
