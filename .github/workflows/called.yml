@@ -17,11 +17,6 @@ jobs:
     steps:      
       - uses: actions/checkout@v2
       - name: Print 
-        run: echo "${{inputs.msg}}"
-
-  do-something-else:
-    runs-on: ubuntu-latest
-
-    steps:
-    - run: |
-        echo "${{inputs.title}}\n${{inputs.request}}\n${{inputs.result}}"
+        run: |
+          curl -X POST -H 'Content-type: application/json' --data '{"blocks": [{"type": "section","text": {"type": "mrkdwn","text":"*Business Services Tests*"}},{"type": "section","block_id": "section567","text": {"type": "mrkdwn","text": "Pull Request Author: :star: \nPull Request Source Branch: \nPull Request Target Branch:\n"},},{"type": "section","block_id": "section789","fields": [{"type": "mrkdwn","text": "*Tests Results*\n Passed"}]}]}' \
+          ${{secrets.SLACK_WEBHOOK}}
