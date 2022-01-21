@@ -8,8 +8,8 @@ on:
   pull_request: 
     branches: [main]
   issue_comment:
-    comment: 
-      - 'github run tests'
+    if: contains(github.event.comment.body, 'github run tests')
+    types: [created ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
