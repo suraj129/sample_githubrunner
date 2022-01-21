@@ -1,5 +1,5 @@
 name: "WebPageTest Action"
-description: "Print webPagetest.org results as commit comment"
+description: "Print webPagetest.org results as commit comment01"
 author: "JCofman"
 runs:
   using: "docker"
