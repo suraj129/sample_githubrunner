@@ -33,6 +33,7 @@ jobs:
     - name: list all workflow runs
       run: |        
         gh api -X GET /repos/${{ github.repository }}/actions/workflows
+        gh api -X GET /repos/${{ github.repository }}/actions/runs
 #| jq '.workflows[] | .name,.id'
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
