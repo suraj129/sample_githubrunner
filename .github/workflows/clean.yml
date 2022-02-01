@@ -31,9 +31,7 @@ jobs:
     - name: Send greeting
       run: echo "Hello ${{ github.event.inputs.name }}"
     - name: list all workflow runs
-      run: |        
-        gh api -X GET /repos/${{ github.repository }}/actions/workflows
+      run: |      #  gh api -X GET /repos/${{ github.repository }}/actions/workflows | jq '.workflows[] | .name,.id'
         gh api -X GET /repos/${{ github.repository }}/actions/runs
-#| jq '.workflows[] | .name,.id'
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
