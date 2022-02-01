@@ -43,7 +43,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
     - name: list all workflow 
-      run: gh api -X GET /repos/${{ github.repository }}/actions/workflows | jq '.workflows[] | select(name="pages build and deployment",.conclusion!="failure")| .id'
+      run: gh api -X GET /repos/${{ github.repository }}/actions/workflows | jq '.workflows[] | select(.name="pages build and deployment",.conclusion!="failure")| .id'
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
     - name: list all workflow runs
