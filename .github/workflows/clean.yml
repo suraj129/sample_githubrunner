@@ -38,7 +38,8 @@ jobs:
       run: gh api -X GET /repos/${{ github.repository }}/actions/workflows
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-    - name: Delete workflow run
-      run: gh api -X DELETE /repos/${{ github.repository }}/actions/runs/5021690894
+    - name: list all workflow 
+      run: gh api -X GET /repos/${{ github.repository }}/actions/workflows | jq '.workflows[] | .name,.event,.conclusion,.id'
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+
