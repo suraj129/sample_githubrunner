@@ -35,9 +35,8 @@ jobs:
     - name: try delete
       id: runID
       run: |
-        gh api -X GET /repos/${{ github.repository }}/actions/runs | jq '.workflow_runs[] | select(.name="pages build and deployment",.conclusion!="failure")| .id'
-      env:
-        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-    - name: display
-      run: |
-        echo ${{ steps.runID.outputs.stdout }}
+        for i in "$(gh api -X GET /repos/${{ github.repository }}/actions/runs | jq '.workflow_runs[] | select(.name="pages build and deployment",.conclusion!="failure")| .id')"
+        do
+          echo $i
+          fi
+        done
