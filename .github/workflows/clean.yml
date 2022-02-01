@@ -5,6 +5,10 @@ name: clean
 # Controls when the action will run. Workflow runs when manually triggered using the UI
 # or API.
 on:
+  
+  push: 
+    branches: [main]
+
   workflow_dispatch:
     # Inputs the workflow accepts.
     inputs:
@@ -39,7 +43,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
     - name: list all workflow 
-      run: gh api -X GET /repos/${{ github.repository }}/actions/workflows | jq '.workflows[] | select(.conclusion!=failure)| .id'
+      run: gh api -X GET /repos/${{ github.repository }}/actions/workflows | jq '.workflows[] | select(.conclusion!="failure")| .id'
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
     - name: list all workflow runs
