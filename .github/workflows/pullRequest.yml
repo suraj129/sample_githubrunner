@@ -7,7 +7,7 @@ name: Prworkflow
 on:
  # pull_request: 
   #  branches: [main]
-  issue_comment: ['github run tests']
+  issue_comment: ['created']
 #  issue_comment:
  #   if: contains(github.event.comment.body, 'github run tests')
   #  types: [created ]
