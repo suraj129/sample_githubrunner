@@ -44,11 +44,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
     - name: list all workflow runs
       run: |
-        gh api --paginate "/repos/${{ github.repository }}/actions/runs"
-      env:
-        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-    - name: try deleting old 
-      run: |
-        gh api -X DELETE "/repos/${{ github.repository }}/actions/runs/1778679825"
+        gh api --paginate "/repos/${{ github.repository }}/actions/runs | jq '.workflows[] | .conclusion"
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
