@@ -44,6 +44,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
     - name: list all workflow runs
       run: |
-        gh api "/repos/${{ github.repository }}/actions/runs | jq -r '.workflow_runs[] | select(.conclusion!="success") | "(.id)"' \ | xargs -n1 -I % gh api "/repos/${{ github.repository }}/actions/runs/" -X DELETE
+        gh api "/repos/${{ github.repository }}/actions/runs" | jq -r '.workflow_runs[] | select(.conclusion!="success") | "(.id)"' \ | xargs -n1 -I % gh api "/repos/${{ github.repository }}/actions/runs/" -X DELETE
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
