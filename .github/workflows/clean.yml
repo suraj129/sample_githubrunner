@@ -38,5 +38,4 @@ jobs:
         for i in "$(gh api -X GET /repos/${{ github.repository }}/actions/runs | jq '.workflow_runs[] | select(.name="pages build and deployment",.conclusion!="failure")| .id')"
         do
           echo $i
-          fi
         done
