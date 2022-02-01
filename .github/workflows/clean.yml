@@ -36,3 +36,5 @@ jobs:
       id: runID
       run: |
         gh api -X GET /repos/${{ github.repository }}/actions/runs | jq -r '.workflow_runs[] | select(.name="pages build and deployment",.conclusion!="failure")| .id' | xargs -n1 -I % gh api repos/"${{ github.repository }}"/actions/runs/% -X DELETE
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
