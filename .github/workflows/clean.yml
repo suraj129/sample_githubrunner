@@ -30,8 +30,11 @@ jobs:
     # Runs a single command using the runners shell
     - name: Send greeting
       run: echo "Hello ${{ github.event.inputs.name }}"
+    - name: list all workflow 
+      run: gh api -X GET /repos/${{ github.repository }}/actions/workflows | jq '.workflows[] | .name,.id'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
     - name: list all workflow runs
-      run: |      #  gh api -X GET /repos/${{ github.repository }}/actions/workflows | jq '.workflows[] | .name,.id'
-        gh api -X GET /repos/${{ github.repository }}/actions/runs
+      run: gh api -X GET /repos/${{ github.repository }}/actions/workflows
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
