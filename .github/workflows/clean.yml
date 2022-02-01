@@ -42,4 +42,8 @@ jobs:
       run: gh api -X GET /repos/${{ github.repository }}/actions/workflows | jq '.workflows[] | .name,.event,.conclusion,.id'
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-
+    - name: list all workflow runs
+      run: |
+        gh api --paginate "/repos/${{ github.repository }}/actions/runs" \ | jq -r -f <(jqscript) \ | fzf --multi
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
