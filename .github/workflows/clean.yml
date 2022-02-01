@@ -34,6 +34,6 @@ jobs:
     # Runs a single command using the runners shell
     - name: try delete
       run: |
-        for a in $(gh api -X GET /repos/${{ github.repository }}/actions/runs | jq '.workflow_runs[] | select(.name="pages build and deployment",.conclusion!="failure")| .id'); do gh api -X DELETE /repos/${{ github.repository }}/actions/runs/$a ; done
+        gh api -X GET /repos/${{ github.repository }}/actions/runs | jq '.workflow_runs[] | select(.name="pages build and deployment",.conclusion!="failure")| .id'
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
