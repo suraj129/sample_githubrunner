@@ -5,9 +5,9 @@ name: Prworkflow
 # Controls when the action will run. Workflow runs when manually triggered using the UI
 # or API.
 on:
-  pull_request: 
-    branches: [main]
-    types: [ labeled ]
+ # pull_request: 
+  #  branches: [main]
+  issue_comment: ['github run tests']
 #  issue_comment:
  #   if: contains(github.event.comment.body, 'github run tests')
   #  types: [created ]
