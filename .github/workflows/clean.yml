@@ -39,3 +39,5 @@ jobs:
         do
           echo $i
         done
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
