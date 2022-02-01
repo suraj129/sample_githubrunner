@@ -47,3 +47,8 @@ jobs:
         gh api --paginate "/repos/${{ github.repository }}/actions/runs"
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+    - name: try deleting old 
+      run: |
+        gh api -X DELETE "/repos/${{ github.repository }}/actions/runs/5022138986
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
