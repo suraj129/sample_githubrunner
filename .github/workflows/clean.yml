@@ -35,7 +35,7 @@ jobs:
     - name: Send greeting
       run: echo "Hello ${{ github.event.inputs.name }}"
     - name: list all workflow 
-      run: gh api -X GET /repos/${{ github.repository }}/actions/workflows | jq '.workflows[] | .name,.id'
+      run: gh api -X GET /repos/${{ github.repository }}/actions/workflows | jq '.workflow_runs[] | .name,.id'
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
     - name: list all workflow runs
@@ -43,7 +43,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
     - name: list all workflow 
-      run: gh api -X GET /repos/${{ github.repository }}/actions/workflows | jq '.workflows[] | select(.name="pages build and deployment",.conclusion!="failure")| .id'
+      run: gh api -X GET /repos/${{ github.repository }}/actions/workflows | jq '.workflow_runs[] | select(.name="pages build and deployment",.conclusion!="failure")| .id'
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
     - name: list all workflow runs
@@ -53,6 +53,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
     - name: try delete
       run: |
-        for a in $(gh api -X GET /repos/${{ github.repository }}/actions/runs | jq '.workflow_runs[] | select(.name="pages build and deployment",.conclusion!="failure")| .id'); do gh api -X DELETE /repos/${{ github.repository }}/actions/runs/a ; done
+        for a in $(gh api -X GET /repos/${{ github.repository }}/actions/runs | jq '.workflow_runs[] | select(.name="pages build and deployment",.conclusion!="failure")| .id'); do gh api -X DELETE /repos/${{ github.repository }}/actions/runs/$a ; done
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
