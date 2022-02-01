@@ -32,25 +32,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     # Runs a single command using the runners shell
-    - name: Send greeting
-      run: echo "Hello ${{ github.event.inputs.name }}"
-    - name: list all workflow 
-      run: gh api -X GET /repos/${{ github.repository }}/actions/workflows | jq '.workflow_runs[] | .name,.id'
-      env:
-        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-    - name: list all workflow runs
-      run: gh api -X GET /repos/${{ github.repository }}/actions/workflows
-      env:
-        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-    - name: list all workflow 
-      run: gh api -X GET /repos/${{ github.repository }}/actions/workflows | jq '.workflow_runs[] | select(.name="pages build and deployment",.conclusion!="failure")| .id'
-      env:
-        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-    - name: list all workflow runs
-      run: |
-        curl -qs /repos/${{ github.repository }}/actions/runs |jq -r '.workflow_runs[] | .id'
-      env:
-        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
     - name: try delete
       run: |
         for a in $(gh api -X GET /repos/${{ github.repository }}/actions/runs | jq '.workflow_runs[] | select(.name="pages build and deployment",.conclusion!="failure")| .id'); do gh api -X DELETE /repos/${{ github.repository }}/actions/runs/$a ; done
