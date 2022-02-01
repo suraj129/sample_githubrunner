@@ -35,12 +35,4 @@ jobs:
     - name: try delete
       id: runID
       run: |
-        for i in "$(gh api -X GET /repos/${{ github.repository }}/actions/runs | jq -R '.workflow_runs[] | select(.name="pages build and deployment",.conclusion!="failure")| .id')"
-        do
-          echo "Start"
-          echo $i
-          echo "END"
-          gh api -X DELETE /repos/"${{ github.repository }}"/actions/runs/$i
-        done
-      env:
-        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        gh api -X GET /repos/${{ github.repository }}/actions/runs | jq -r '.workflow_runs[] | select(.name="pages build and deployment",.conclusion!="failure")| .id' | xargs -n1 -I % gh api repos/"${{ github.repository }}"/actions/runs/% -X DELETE
