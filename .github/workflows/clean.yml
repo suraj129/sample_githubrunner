@@ -39,6 +39,9 @@ jobs:
         for a in $(curl -qs "https://api.github.com/repos/suraj129/sample_githubrunner/actions/runs" -H "Authorization: token  ${{ secrets.GH_TOKEN }}" | jq -r '.workflow_runs[] | select(.updated_at>"2022-01-16T08:25:19Z") | .id');
         do
           echo $a
+          curl -X DELETE   -H "Accept: application/vnd.github.v3+json" \
+                 -H "Authorization: token ${{ secrets.GH_TOKEN }}" \
+                 "https://api.github.com/repos/suraj129/sample_githubrunner/actions/runs/$a";
         done
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
