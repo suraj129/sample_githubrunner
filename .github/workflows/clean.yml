@@ -35,6 +35,6 @@ jobs:
     - name: try delete
       id: runID
       run: |
-        echo $(date -10d +'%Y-%m-%dT%H:%M:%Sz')
+        echo $(date --date="20 days ago" +'%Y-%m-%dT%H:%M:%SZ')
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
