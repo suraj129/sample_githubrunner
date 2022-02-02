@@ -46,10 +46,8 @@ jobs:
               -H "Authorization: token ${{ secrets.GH_TOKEN }}" \
               "https://api.github.com/repos/suraj129/sample_githubrunner/actions/runs/$a"
               echo Deleted workflow run ID: $a
-            fi
             else
               echo Workflow was Not found which is older than $getDate
-              fi
-          done
+            done
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
