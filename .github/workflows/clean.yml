@@ -39,13 +39,13 @@ jobs:
         getDate=$(date --date="20 days ago" +'%Y-%m-%dT%H:%M:%SZ')
         echo deleting workflow older than $getDate
         for a in $(curl -qs https://api.github.com/repos/suraj129/sample_githubrunner/actions/runs -H "Authorization: token  ${{ secrets.GH_TOKEN }}" | jq -r '.workflow_runs[] | select(.updated_at>"$getDate") | .id')
-            if [ ! -z "$a" ] then
+            if [ ! -z "$a" ] then;
               echo Run ID to be deleted : $a
               curl -X DELETE -H "Accept: application/vnd.github.v3+json" \
               -H "Authorization: token ${{ secrets.GH_TOKEN }}" \
               "https://api.github.com/repos/suraj129/sample_githubrunner/actions/runs/$a"
               echo Deleted workflow run ID: $a
             else
-              echo Workflow was Not found which is older than $getDate
+              echo Workflow was Not found which is older than $getDate;
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
