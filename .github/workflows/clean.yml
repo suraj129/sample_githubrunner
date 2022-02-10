@@ -7,7 +7,7 @@ name: clean
 on:
   
   push: 
-    branches: [main]
+    branches: [main, abc*, bcd*]
 
   workflow_dispatch:
     # Inputs the workflow accepts.
