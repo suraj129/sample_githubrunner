@@ -5,9 +5,10 @@ name: clean
 # Controls when the action will run. Workflow runs when manually triggered using the UI
 # or API.
 on:
-  
-  push: 
-    branches: [main, abc*, bcd*]
+  pull_request:
+    types: [ labeled ]
+#  push: 
+#    branches: [main, abc*, bcd*]
 
   workflow_dispatch:
     # Inputs the workflow accepts.
