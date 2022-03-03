@@ -5,17 +5,19 @@
 # https://github.com/actions/stale
 name: Mark stale issues and pull requests
 
-on: issue_comment
+on: 
+  issue_comment:
+    types: [created]
+ 
 
 jobs:
-  stale:
-
+  pr_commented:
+    # This job only runs for pull request comments
+    name: PR comment
+    if: ${{ github.event.issue.pull_request }}
     runs-on: ubuntu-latest
-    permissions:
-      issues: write
-      pull-requests: write
-
     steps:
-    - name: run me
-      run: |
-        echo "hi"
+      - run: |
+          echo A comment on PR $NUMBER
+        env:
+          NUMBER: ${{ github.event.issue.number }}
