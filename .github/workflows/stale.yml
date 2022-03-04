@@ -1,32 +1,45 @@
-# This workflow warns and then closes issues and PRs that have had no activity for a specified amount of time.
-#
-# You can adjust the behavior by modifying this file.
-# For more information, see:
-# https://github.com/actions/stale
-name: Mark stale issues and pull requests
-
-on: 
+on:
+  pull_request:
+    types: [opened]
   issue_comment:
     types: [created]
- 
-
 jobs:
-  pr_commented:
-    # This job only runs for pull request comments
-    name: PR comment
-    if: ${{ github.event.issue.pull_request && github.event.comment.body == 'Github run tests'}}
+  deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: Github API Request
-      id: request
-      uses: octokit/request-action@v2.0.0
-      with:
-        route: ${{ github.event.issue.pull_request.url }}
-      env:
-        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-    - name: Checkout PR Branch
-      uses: actions/checkout@v2
-      with:
-        token: ${{ secrets.GH_TOKEN }}
-        repository: ${{ fromJson(steps.request.outputs.data).head.repo.full_name }}
-        ref: ${{ steps.request.outputs.branch }}
+      - uses: khan/pull-request-comment-trigger@master
+        id: check
+        with:
+          trigger: 'TRIGGER WORKFLOW'
+          reaction: rocket
+        env:
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+      - name: GitHub API Request
+        if: steps.check.outputs.triggered == 'true'
+        id: request
+        uses: octokit/request-action@v2.0.0
+        with:
+          route: ${{ github.event.issue.pull_request.url }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Get PR informations
+        if: steps.check.outputs.triggered == 'true'
+        id: pr_data
+        run: |
+          echo "::set-output name=branch::${{ fromJson(steps.request.outputs.data).head.ref }}"
+          echo "::set-output name=repo_name::${{ fromJson(steps.request.outputs.data).base.repo.full_name }}"
+          echo "::set-output name=repo_clone_url::${{ fromJson(steps.request.outputs.data).base.repo.clone_url }}"
+          echo "::set-output name=repo_ssh_url::${{ fromJson(steps.request.outputs.data).base.repo.ssh_url }}"
+      - name: clone branch of PR
+        if: steps.check.outputs.triggered == 'true'
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: ${{ steps.pr_data.outputs.branch }}
+      - name: Save comment in file
+        if: steps.check.outputs.triggered == 'true'
+        run: echo ${{ github.event.comment.body }} > comments/$(date +"%s").txt
+      - uses: stefanzweifel/git-auto-commit-action@v4.1.1
+        if: steps.check.outputs.triggered == 'true'
+        with:
+          commit_message: commit comment timestamp
