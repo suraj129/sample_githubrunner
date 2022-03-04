@@ -13,7 +13,7 @@ jobs:
           trigger: 'TRIGGER WORKFLOW'
           reaction: rocket
         env:
-          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+          GITHUB_TOKEN: '${{ secrets.GH_TOKEN }}'
       - name: GitHub API Request
         if: steps.check.outputs.triggered == 'true'
         id: request
@@ -21,7 +21,7 @@ jobs:
         with:
           route: ${{ github.event.issue.pull_request.url }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       - name: Get PR informations
         if: steps.check.outputs.triggered == 'true'
         id: pr_data
@@ -34,7 +34,7 @@ jobs:
         if: steps.check.outputs.triggered == 'true'
         uses: actions/checkout@v2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GH_TOKEN }}
           ref: ${{ steps.pr_data.outputs.branch }}
       - name: Save comment in file
         if: steps.check.outputs.triggered == 'true'
