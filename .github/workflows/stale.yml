@@ -6,8 +6,6 @@
 name: Mark stale issues and pull requests
 
 on: 
-  pull_request:  
-    types: [opened]
   issue_comment:
     types: [created]
  
@@ -19,32 +17,10 @@ jobs:
     if: ${{ github.event.issue.pull_request && github.event.comment.body == 'Github run tests'}}
     runs-on: ubuntu-latest
     steps:
-    - name: Get PR SHA
-      id: sha
-      uses: actions/github-script@v4
-      with:
-        result-encoding: string
-        script: |
-          const { owner, repo, number } = context.issue;
-          const pr = await github.pulls.get({
-            owner,
-            repo,
-            pull_number: number,
-          });
-          return pr.data.head.sha
-
-    - uses: actions/checkout@v1
-      with:
-        ref: ${{ steps.sha.outputs.result }}
-
     - name: Github API Request
       id: request
       uses: octokit/request-action@v2.0.0
       with:
         route: ${{ github.event.issue.pull_request.url }}
-
-    - name: Checkout PR Branch
-      uses: actions/checkout@v2
-      with:        
-        repository: ${{ fromJson(steps.request.outputs.data).head.repo.full_name }}
-        ref: ${{ steps.request.outputs.branch }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
