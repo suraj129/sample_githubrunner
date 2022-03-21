@@ -14,4 +14,4 @@ jobs:
     if: ${{ github.event.label.name != 'develop-devint' }}
     runs-on: ubuntu-latest
     steps:
-    - run: exit1
+    - run: exit 1
