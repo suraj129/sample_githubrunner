@@ -40,4 +40,5 @@ jobs:
           echo "Sencha Tests - PASS"
         else
           echo "Sencha Tests - Failed"
+        fi
       shell: bash
