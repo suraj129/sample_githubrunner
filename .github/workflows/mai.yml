@@ -28,4 +28,4 @@ jobs:
     - name: output
       if: "!${{ steps.sencha_test.outputs }} == *'0.00 %'*"
       run: |
-        echo "${{ steps.sencha_test.outputs }}"
+        echo "${{ steps.sencha_test.outputs.var }}"
