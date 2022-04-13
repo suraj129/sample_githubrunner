@@ -33,3 +33,11 @@ jobs:
       if: steps.sencha_test.outcome != 'success'
       run: |
         exit 1
+    - name: run she
+      run: |
+        output=100
+        if [[ "$output" == *"100.00 %"* ]] && [[ "$output" == *"failed: 0"* ]] ; then
+          echo "Sencha Tests - PASS"
+        else
+          echo "Sencha Tests - Failed"
+      shell: bash
