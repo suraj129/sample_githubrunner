@@ -26,6 +26,6 @@ jobs:
         echo "ip_address=$(curl -s ifconfig.me)" >> $GITHUB_ENV
       shell: bash
     - name: output
-      if: "!${{ steps.sencha_test.outputs }} == *'0.00 %'*"
+      if: "!${{ env.ip_address }} == *'0.00 %'*"
       run: |
         echo IP Adress is: ${{ env.ip_address }}
