@@ -26,6 +26,6 @@ jobs:
         echo "ip_address=40.77.14" >> $GITHUB_ENV
       shell: bash
     - name: output
-      if: ${{ env.ip_address }}==40.77.15
+      if: ${{ env.ip_address }}=="40.77.15"
       run: |
         echo IP Adress is: ${{ env.ip_address }}
