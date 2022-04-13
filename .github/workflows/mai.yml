@@ -26,5 +26,6 @@ jobs:
         echo "Sencha Test @ 7.183m |   progress: [----------]  0.00 %   ┊   tests: 0   ┊   passed: 0   ┊   failed: 4   ┊"
       shell: bash
     - name: output
-      if: "${{ steps.sencha_test.outputs }} == *'0.00 %'* && ${{ steps.sencha_test.outputs }} == *'failed: 4'*"
-      run: exit 1
+      if: "!${{ steps.sencha_test.outputs }} == *'0.00 %'*"
+      run: |
+        exit 1
