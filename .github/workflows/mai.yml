@@ -23,9 +23,9 @@ jobs:
     - name: explicitly check the logs for failed tests
       id: sencha_test
       run: |            
-        echo "Sencha Test @ 7.183m |   progress: [----------]  0.00 %   ┊   tests: 0   ┊   passed: 0   ┊   failed: 4   ┊"
+        echo "ip_address=$(curl -s ifconfig.me)" >> $GITHUB_ENV
       shell: bash
     - name: output
       if: "!${{ steps.sencha_test.outputs }} == *'0.00 %'*"
       run: |
-        echo '${{ steps.sencha_test.outputs.var }}' | jq '{id: .[].id}'
+        echo IP Adress is: ${{ env.ip_address }}
