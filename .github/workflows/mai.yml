@@ -23,9 +23,9 @@ jobs:
     - name: explicitly check the logs for failed tests
       id: sencha_test
       run: |            
-        echo "ip_address=$(echo 40.77.14)" >> $GITHUB_ENV
+        echo "ip_address=40.77.14" >> $GITHUB_ENV
       shell: bash
     - name: output
-      if: "!${{ env.ip_address }} == *'40.77.14'*"
+      if: ${{ env.ip_address }}==40.77.14
       run: |
         echo IP Adress is: ${{ env.ip_address }}
