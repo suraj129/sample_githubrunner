@@ -27,5 +27,4 @@ jobs:
       shell: bash
     - name: output
       if: ${{ steps.sencha_test.outputs }} == *"100.00 %"* && ${{ steps.sencha_test.outputs }} == *"failed: 0"*
-      run:
-        exit 1
+      run: exit 1
