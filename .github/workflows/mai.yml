@@ -29,7 +29,8 @@ jobs:
       if: ${{ env.ip_address }}=="40.77.15"
       run: |
         echo IP Adress is: ${{ env.ip_address }}
-        echi $GITHUB_WORKSPACE
+        echo $GITHUB_WORKSPACE 
+        echo ${{ github.workspace }} 
     - name: output1
       if: steps.sencha_test.outcome != 'success'
       run: |
